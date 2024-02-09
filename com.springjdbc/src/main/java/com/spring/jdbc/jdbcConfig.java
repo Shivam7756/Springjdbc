@@ -11,6 +11,8 @@ import com.spring.jdbc.dao.StudentDao;
 import com.spring.jdbc.dao.StudentDaoImpl;
 
 @Configuration
+@ComponentScan(basePackages = {"com.spring.jdbc.dao"})//scans the particular package , and gets the studentDaoImpl class
+//and then creates its object ,dont need to use the bean tag now for creating studentdao object
 public class jdbcConfig {
 
 	@Bean("ds")
@@ -32,11 +34,11 @@ public class jdbcConfig {
 		return template;
 	}
 	
-	@Bean("studentDao")
-	public StudentDao getStudentDao()
-	{
-		StudentDaoImpl studentDao = new StudentDaoImpl();
-		studentDao.setJdbcTemplate(getTemplate());
-		return studentDao;
-	}
+	// @Bean("studentDao") , This is not needed as we are using the @ComponentScan() Annotation
+	// public StudentDao getStudentDao()
+	// {
+	// 	StudentDaoImpl studentDao = new StudentDaoImpl();
+	// 	studentDao.setJdbcTemplate(getTemplate());
+	// 	return studentDao;
+	// }
 }
